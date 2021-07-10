@@ -6,6 +6,7 @@ require (
 	github.com/acomagu/bufpipe v1.0.3
 	github.com/anmitsu/go-shlex v0.0.0-20161002113705-648efa622239 // indirect
 	github.com/armon/go-socks5 v0.0.0-20160902184237-e75332964ef5
+	github.com/aws/aws-sdk-go v1.39.2
 	github.com/emirpasic/gods v1.12.0
 	github.com/flynn/go-shlex v0.0.0-20150515145356-3f9db97f8568 // indirect
 	github.com/gliderlabs/ssh v0.2.2
@@ -21,9 +22,9 @@ require (
 	github.com/sergi/go-diff v1.1.0
 	github.com/xanzy/ssh-agent v0.3.0
 	golang.org/x/crypto v0.0.0-20210421170649-83a5a9bb288b
-	golang.org/x/net v0.0.0-20210326060303-6b1517762897
+	golang.org/x/net v0.0.0-20210614182718-04defd469f4e
 	golang.org/x/sys v0.0.0-20210502180810-71e4cd670f79
-	golang.org/x/text v0.3.3
+	golang.org/x/text v0.3.6
 	gopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c
 	gopkg.in/warnings.v0 v0.1.2 // indirect
 )
