@@ -1,40 +1,33 @@
 package s3git
 
 import (
-	"fmt"
-
 	"github.com/go-git/go-git/v5/plumbing"
 	"github.com/go-git/go-git/v5/plumbing/storer"
 )
 
 func (s *s3Git) SetReference(r *plumbing.Reference) error {
-	var content string
-	switch r.Type() {
-	case plumbing.SymbolicReference:
-		content = fmt.Sprintf("ref: %s\n", r.Target())
-	case plumbing.HashReference:
-		content = fmt.Sprintln(r.Hash().String())
-	}
-
-	fileName := r.Name().String()
-
-	return s.setRef(fileName, content, nil)
+	return s.dotgit.SetRef(r, nil)
 }
-func (s *s3Git) CheckAndSetReference(new, old *plumbing.Reference) error {
-	panic("")
+func (s *s3Git) CheckAndSetReference(r, old *plumbing.Reference) error {
+	return s.dotgit.SetRef(r, old)
 }
 func (s *s3Git) Reference(name plumbing.ReferenceName) (*plumbing.Reference, error) {
-	panic("")
+	return s.dotgit.Ref(name)
 }
 func (s *s3Git) IterReferences() (storer.ReferenceIter, error) {
-	panic("")
+	refs, err := s.dotgit.Refs()
+	if err != nil {
+		return nil, err
+	}
+
+	return storer.NewReferenceSliceIter(refs), nil
 }
-func (s *s3Git) RemoveReference(name plumbing.ReferenceName) error {
-	panic("")
+func (s *s3Git) RemoveReference(n plumbing.ReferenceName) error {
+	return s.dotgit.RemoveRef(n)
 }
 func (s *s3Git) CountLooseRefs() (int, error) {
-	panic("")
+	return s.dotgit.CountLooseRefs()
 }
 func (s *s3Git) PackRefs() error {
-	panic("")
+	return s.dotgit.PackRefs()
 }

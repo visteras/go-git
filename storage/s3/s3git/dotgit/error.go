@@ -1,4 +1,4 @@
-package wrapper
+package dotgit
 
 import (
 	"fmt"
@@ -9,7 +9,6 @@ import (
 type Error struct {
 	msg     string
 	code    ErrorCode
-	bucket  string
 	err     error
 	details []string
 }
@@ -20,7 +19,7 @@ func (e Error) Error() string {
 			e.msg = msg
 		}
 	}
-	res := "s3 (" + e.code.String() + "): [" + e.bucket + "]"
+	res := "s3 (" + e.code.String() + ")"
 	if e.msg != "" {
 		res += " - " + e.msg
 	}
@@ -54,11 +53,6 @@ func (e Error) WithError(err error) *Error {
 
 func (e Error) WithMsg(msg string) *Error {
 	e.msg = msg
-	return &e
-}
-
-func (e Error) WithBucket(bucket string) *Error {
-	e.bucket = bucket
 	return &e
 }
 
@@ -99,31 +93,9 @@ func (e ErrorCode) String() string {
 type ErrMessages map[ErrorCode]string
 
 var messages = ErrMessages{
-	ErrConn: "connection error",
-
-	ErrNilRecord: "nil record",
-	ErrUpload:    "unable to upload",
-	ErrDownload:  "unable to download",
-	ErrDeleted:   "unable to deleted",
-	ErrGetList:   "unable to get list items",
-
-	ErrAccessDenied:      "access denied",
-	ErrNoSuchBucket:      "no such bucket",
-	ErrInvalidBucketName: "invalid bucket name",
-	ErrNoSuchKey:         "no such key",
+	ErrPackedRefsBadFormat: "malformed packed-ref",
 }
 
 const (
-	ErrConn = ErrorCode(1000)
-
-	ErrNilRecord = ErrorCode(1101)
-	ErrDownload  = ErrorCode(1102)
-	ErrUpload    = ErrorCode(1103)
-	ErrDeleted   = ErrorCode(1104)
-	ErrGetList   = ErrorCode(1105)
-
-	ErrAccessDenied      = ErrorCode(1201)
-	ErrNoSuchBucket      = ErrorCode(1202)
-	ErrInvalidBucketName = ErrorCode(1203)
-	ErrNoSuchKey         = ErrorCode(1204)
+	ErrPackedRefsBadFormat = ErrorCode(2101)
 )

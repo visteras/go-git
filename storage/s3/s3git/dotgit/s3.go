@@ -1,4 +1,4 @@
-package s3git
+package dotgit
 
 type S3Client interface {
 	CreateBucket(name string) error
@@ -8,4 +8,5 @@ type S3Client interface {
 	Delete(path string) error
 
 	Join(elem ...string) string
+	GetListObjects(path string) ([]string, error)
 }
